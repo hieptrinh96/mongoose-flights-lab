@@ -1,0 +1,1 @@
+import { Flights } from '../controllers/flights.js'
