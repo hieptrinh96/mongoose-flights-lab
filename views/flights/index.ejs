@@ -8,12 +8,29 @@
         <thead>
           <tr>
             <th>Airline</th>
-            <th>airport</th>
+            <th>Airport</th>
             <th>flightNo</th>
             <th>departs</th>
           </tr>
         </thead>
         <tbody>
+          <% flights.forEach(flight=> { %>
+            <tr>
+
+              <td>
+                <%= flight.airline %>
+              </td>
+              <td>
+                <%= flight.airport %>
+              </td>
+              <td>
+                <%= flight.flightNo %>
+              </td>
+              <td>
+                <%= flight.departs %>
+              </td>
+            </tr>
+            <% }) %>
         </tbody>
       </table>
     </main>
