@@ -19,7 +19,10 @@
               <form action="/flights/<%= flight._id %>?_method=delete" class="delete-form" method="post">
                 <td>
                   <button type="submit">X</button>
-                  <%= flight.airline %>
+
+                  <a href="/flights/<%= flight._id %>">
+                    <%= flight.airline %>
+                  </a>
                 </td>
                 <td>
                   <%= flight.airport %>

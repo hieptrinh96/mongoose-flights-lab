@@ -47,7 +47,8 @@ function show(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
       res.render('flights/show', {
-        flight: flight
+        flight: flight,
+        title: 'Flight Detail'
       })
     })
     .catch(error => {
@@ -60,7 +61,8 @@ function edit(req, res) {
   Flight.findById(req.params.id)
     .then(flight => {
       res.render('flights/edit', {
-        flight: flight
+        flight: flight,
+        title: 'Edit Flight'
       })
     })
     .catch(error => {
