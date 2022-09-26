@@ -17,9 +17,16 @@ const flightSchema = new Schema({
     max: 9999
   },
   departs: {
-    type: Date
+    type: Date,
+    default: setYear()
   }
 })
+
+function setYear() {
+  const today = new Date();
+  today.setFullYear(today.getFullYear() + 1)
+  return today
+}
 
 const Flight = mongoose.model('Flight', flightSchema)
 // when u submit a form and u leave a blank 

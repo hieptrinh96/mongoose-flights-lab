@@ -15,13 +15,13 @@ function index(req, res) {
 }
 
 function newFlight(req, res) {
-  res.render('flights/new', {
-    title: 'Add Flight',
-  })
   const newFlight = new Flight();
   const dt = newFlight.departs;
   const departsDate = dt.toISOString().slice(0, 16);
-  res.render('flights/new', { departsDate })
+  res.render('flights/new', {
+    title: 'Add Flight',
+    departsDate
+  })
 }
 
 function create(req, res) {
@@ -66,7 +66,7 @@ function edit(req, res) {
     .then(flight => {
       res.render('flights/edit', {
         flight: flight,
-        title: 'Edit Flight'
+        title: 'Edit Flight',
       })
     })
     .catch(error => {
