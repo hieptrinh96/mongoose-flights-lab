@@ -3,22 +3,51 @@
   <%- include('../partials/nav') %>
     <main>
       <h1>Flight Detail</h1>
-      <form id="new-form" action="/flights/<%= flight._id %>?_method=put" method="post" autocomplete="off">
-        <h4>Airline: <%= flight.airline %>
-        </h4>
-        <h4>Airport: <%= flight.airport %>
-        </h4>
-        <h4>Flight Number: <%= flight.flightNo %>
-        </h4>
-        <h4>Departs on: <%= flight.departs.toISOString().slice(0, 16) %>
-        </h4>
-        <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
-        <a href="/flights">Go Back!</a>
+      <h4>Airline: <%= flight.airline %>
+      </h4>
+      <h4>Airport: <%= flight.airport %>
+      </h4>
+      <h4>Flight Number: <%= flight.flightNo %>
+      </h4>
+      <h4>Departs on: <%= flight.departs.toISOString().slice(0, 16) %>
+      </h4>
+
+      <% if (flight.tickets.length) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Seat</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% flight.tickets.forEach(ticket=> { %>
+              <tr>
+                <td>
+                  <%= ticket.createdAt.toLocaleString() %>
+                </td>
+                <td>
+                  <%= ticket.seat%>
+                </td>
+                <td>
+                  <%= ticket.price %>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+          <h3>No tickets bought!</h3>
+          <% } %>
+            <form action="/flights/<%= flight._id %>/tickets" method="post">
+              <label for="price">Price:</label>
+              <input type="number" name="price">
+              <label for="seat">Seat:</label>
+              <input name="seat" required pattern="[A-F][1-9]\d?">
+              <button type="submit">Buy Ticket</button>
+            </form>
+            <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
+            <a href="/flights">Go Back!</a>
     </main>
-
-
-
-
-
-
     <%- include('../partials/footer') %>
