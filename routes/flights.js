@@ -13,7 +13,7 @@ router.post('/', flightsCtrl.create)
 router.post('/:id/tickets', flightsCtrl.createTicket)
 
 router.delete('/:id', flightsCtrl.deleteFlight)
-router.delete('/:id/tickets', flightsCtrl.deleteTicket)
+router.delete('/:id/tickets/:ticketId', flightsCtrl.deleteTicket)
 
 router.put('/:id', flightsCtrl.update)
 

@@ -33,6 +33,11 @@
                 <td>
                   <%= ticket.price %>
                 </td>
+                <td>
+                  <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=delete" method="post">
+                    <button type="submit">x</button>
+                  </form>
+                </td>
               </tr>
               <% }) %>
           </tbody>
@@ -47,6 +52,7 @@
               <input name="seat" required pattern="[A-F][1-9]\d?">
               <button type="submit">Buy Ticket</button>
             </form>
+
             <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
             <a href="/flights">Go Back!</a>
     </main>
