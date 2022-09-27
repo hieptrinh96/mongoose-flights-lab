@@ -26,6 +26,7 @@ const flightSchema = new Schema({
     type: Date,
     default: setYear()
   },
+  food: { type: Schema.Types.ObjectId, ref: 'Meal' },
   tickets: [ticketSchema]
 }, {
   timestamps: true
