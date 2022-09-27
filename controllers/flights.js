@@ -1,5 +1,5 @@
 import { Flight } from '../models/flight.js'
-
+import { Meal } from '../models/meal.js'
 function index(req, res) {
   Flight.find({})
     .then(flights => {
@@ -106,11 +106,10 @@ function createTicket(req, res) {
 }
 
 function deleteTicket(req, res) {
-  console.log('req.params.id', req.params.id)
-  console.log('req.params.ticketId', req.params.ticketId)
   Flight.findById(req.params.id)
     .then(flight => {
       console.log(flight)
+      // we have to access the tickets property of the flight object
       flight.tickets.remove(req.params.ticketId)
       flight.save()
         .then(() => {
