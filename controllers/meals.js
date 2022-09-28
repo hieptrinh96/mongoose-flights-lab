@@ -5,7 +5,7 @@ function newMeal(req, res) {
     .then(meals => {
       res.render('meals/new', {
         title: 'Add Meals',
-        meals
+        meals: meals
       })
     })
     .catch(error => {

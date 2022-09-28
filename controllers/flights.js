@@ -49,11 +49,20 @@ function deleteFlight(req, res) {
 
 function show(req, res) {
   Flight.findById(req.params.id)
+    .populate('food')
     .then(flight => {
-      res.render('flights/show', {
-        flight: flight,
-        title: 'Flight Detail'
-      })
+      Meal.find({ _id: { $nin: flight.food } })
+        .then(meals => {
+          res.render('flights/show', {
+            title: 'Flight Detail',
+            flight: flight,
+            meals: meals
+          })
+        })
+        .catch(error => {
+          console.log(error)
+          res.redirect('/')
+        })
     })
     .catch(error => {
       console.log(error)
@@ -126,14 +135,26 @@ function deleteTicket(req, res) {
     })
 }
 
+function addToFood(req, res) {
+  Flight.findById(req.params.id)
+    .then(flight => {
+      flight.food.push(req.body.mealId)
+      flight.save()
+        .then(() => {
+          res.redirect(`/flights/${flight._id}`)
+        })
+    })
+}
+
 export {
   index,
   newFlight as new,
   create,
   deleteFlight,
+  addToFood,
   show,
   edit,
   update,
   createTicket,
-  deleteTicket
+  deleteTicket,
 }
