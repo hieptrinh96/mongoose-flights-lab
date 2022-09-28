@@ -11,7 +11,6 @@
       </h4>
       <h4>Departs on: <%= flight.departs.toISOString().slice(0, 16) %>
       </h4>
-
       <% if (flight.tickets.length) { %>
         <table>
           <thead>
@@ -51,6 +50,24 @@
               <label for="seat">Seat:</label>
               <input name="seat" required pattern="[A-F][1-9]\d?">
               <button type="submit">Buy Ticket</button>
+            </form>
+            <ul>
+              <h3>Meals</h3>
+              <% flight.food.forEach(meal=> { %>
+                <li>
+                  <%= meal.name %>
+                </li>
+                <% }) %>
+            </ul>
+            <form id="add-per-to-cast" action="/flights/<%= flight._id %>/meals" method="POST">
+              <select name="mealId">
+                <% meals.forEach(meal=> { %>
+                  <option value="<%= meal._id %>">
+                    <%= meal.name %>
+                  </option>
+                  <% }) %>
+              </select>
+              <button type="submit">Add Meal</button>
             </form>
             <span>
               <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
